@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+</head>
+<body>
+     <div id="date">
+      <p>дата и время: {{ currentDate }}</p>
+     </div>
+      <br>
+       <div id="calc">
+        <input type="text" v-model="operand1" placeholder="Введите число или текст" @input="validateInput('operand1')">
+        <select v-model="selectedOperation">
+            <option value="add">+</option>
+            <option value="subtract">-</option>
+            <option value="multiply">*</option>
+            <option value="divide">/</option>
+        </select>
+        <input type="text" v-model="operand2" placeholder="Введите число или текст" @input="validateInput('operand2')">
+        <button @click="calculate">Вычислить</button>
+
+        <p v-if="errorMessage">{{ errorMessage }}</p>
+        <p v-else>Результат: {{ result }}</p>
+
+        <hr>
+
+        <h2>История вычислений</h2>
+        <ul>
+          <li v-for="(calculation, index) in history" :key="index">
+            <strong>{{ calculation.operation }}</strong> - {{ calculation.expression }} ({{ calculation.date }})
+          </li>
+        </ul>
+       </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="scr.js"></script>
+</body>
+</html>
